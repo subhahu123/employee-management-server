@@ -4,39 +4,42 @@ var request = require('request');
 const bodyParser = require('body-parser');
 
 
-const accountSid = "ACf7b71473a82b5d211a1cef54b6509b0c" ;
-const authToken = "cf7328a7ced1745df7b581e2cb4c065a" ;
+const accountSid = "ACf7b71473a82b5d211a1cef54b6509b0c";
+const authToken = "cf7328a7ced1745df7b581e2cb4c065a";
 
 const client = require('twilio')(accountSid, authToken);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 
 app.post('/incoming', (req, res) => {
     const twiml = new MessagingResponse();
-    var sem ;
-    var rollno ;
-    var html ;
+    var sem;
+    var rollno;
+    var html;
     var query = req.body.Body;
-    query = query.split(" ") ;
-    rollno = query[0] ;
-    sem = query[1] ;
-    console.log(rollno) ;
-    console.log(sem) ;
+    query = query.split(" ");
+    rollno = query[0];
+    sem = query[1];
+    console.log(rollno);
+    console.log(sem);
 
     var base = `https://vast-escarpment-73783.herokuapp.com/student/${sem}/${rollno}`;
-  //  res.end(sem);
+    //  res.end(sem);
     request(base, function (error, response, body) {
-        body = JSON.parse(body)  
-        data = body[0] ;
-        console.log(data) ;
+        body = JSON.parse(body)
+        data = body[0];
+        console.log(data);
+        if (typeof (subjectdata[paperid]) != 'undefined') {
             console.log(data);
-          html = `<div class="jumbotron" style="padding: 10px;"><label>RollNo. : </label> ${data.rollNo} 
+            html = `<div class="jumbotron" style="padding: 10px;"><label>RollNo. : </label> ${data.rollNo} 
                                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                                 <label>Name : </label> ${data.name} </div> <br>`;
-            console.log(html) ;
+            console.log(html);
             var sum = 0;
             var total = 0;
 
@@ -79,27 +82,34 @@ app.post('/incoming', (req, res) => {
                       <button class="btn" onclick="sendmail()" > send report to yourself </button>`;
 
             console.log(data);
-            console.log(html) ;
-        //  html = encodeURIComponent(html);
+            console.log(html);
+            //  html = encodeURIComponent(html);
             // console.log("subh@@####" + html.toString()) ;
-            twiml.message("Name: " + data.name + "\n" + "Roll No.: " + data.rollNo + "\n" + "Percentage: " + percentage );
-            res.writeHead(200, {'Content-Type': 'text/xml'});
-            res.end(twiml.toString()) ;
-}) ;
+            twiml.message("Name: " + data.name + "\n" + "Roll No.: " + data.rollNo + "\n" + "Percentage: " + percentage);
+            res.writeHead(200, {
+                'Content-Type': 'text/xml'
+            });
+            res.end(twiml.toString());
+
+        }
+
+        else {
+            res.end("sorry no result") ;
+        }
 
 
-          
+    })
+
 
 });
 
 
 
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+app.get('/', function (request, response) {
+    response.sendFile(__dirname + '/views/index.html');
 });
 
 
-var listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+var listener = app.listen(process.env.PORT, function () {
+    console.log('Your app is listening on port ' + listener.address().port);
 });
-
