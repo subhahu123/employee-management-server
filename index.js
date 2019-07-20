@@ -94,7 +94,11 @@ app.post('/incoming', (req, res) => {
         }
 
         else {
-            res.end("sorry no result") ;
+            twiml.message("sorry no result") ;
+            res.writeHead(200, {
+                'Content-Type': 'text/xml'
+            });
+            res.end(twiml.toString());
         }
 
 
