@@ -7,12 +7,10 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.16.3",
-    "nodemon": "^1.19.1",
-    "pm2": "^3.5.1",
     "request": "^2.88.0",
     "twilio": "^4.6.0"
   },
