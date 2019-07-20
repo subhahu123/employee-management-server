@@ -33,7 +33,7 @@ app.post('/incoming', (req, res) => {
         data = body[0] ;
         console.log(data) ;
             console.log(data);
-           html = `<div class="jumbotron" style="padding: 10px;"><label>RollNo. : </label> ${data.rollNo} 
+          html = `<div class="jumbotron" style="padding: 10px;"><label>RollNo. : </label> ${data.rollNo} 
                                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                                 <label>Name : </label> ${data.name} </div> <br>`;
             console.log(html) ;
