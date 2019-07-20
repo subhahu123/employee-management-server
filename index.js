@@ -34,7 +34,7 @@ app.post('/incoming', (req, res) => {
         body = JSON.parse(body)
         data = body[0];
         console.log(data);
-        if (typeof(data["rollNo"]) != 'undefined') {
+        if (typeof(data["results"]) != 'undefined') {
             console.log(data);
             html = `<div class="jumbotron" style="padding: 10px;"><label>RollNo. : </label> ${data.rollNo} 
                                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
