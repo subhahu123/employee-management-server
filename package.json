@@ -19,6 +19,9 @@
   "engines": {
     "node": "8.x"
   },
+  "events": {
+    "crashed": "npm start"
+  },
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"
   },
